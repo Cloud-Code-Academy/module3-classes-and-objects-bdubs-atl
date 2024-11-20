@@ -26,13 +26,13 @@
  * Math class: https://developer.salesforce.com/docs/atlas.en-us.apexref.meta/apexref/apex_methods_system_math.htm
  * Classes: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_understanding.htm
  *
- * @author Your Name
+ * @author Ben Wheeler
  */
 
 public with sharing class ClassesObjectsMethods {
     
     /**
-     * Question 1
+     * Question 1 <---Done
      * It initializes a String to "Hello, Salesforce!" and demonstrates usage of
      * the length, substring, and toLowerCase methods of the String class.
      * Example: practiceStringMethods() should return a list like ["17", "Hello", "hello, salesforce!"].
@@ -40,60 +40,74 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<String> practiceStringMethods() {
         // Initialize a String with 'Hello, Salesforce!'
-        
-        // Get the length of the String        
+        String helloSalesforce = ('Hello, Salesforce!');
+        // Get the length of the String  
+        Integer stringLength = helloSalesforce.length();    
         // Get a substring of the String of the first 5 characters
+        String substringFirstFive = helloSalesforce.substring(0,5);
         // Convert the String to lower case
-        
+        String lowerCaseConversion = helloSalesforce.toLowerCase();
         // Return the list with the string data
         // In the first position add the string length
         // In the second position add the substring
         // In the third position add the string in lower case
-
-        return null; // Replace null with the variable you used to store the result
+        List<String> result = new List<String>();
+        result.add(String.valueOf(stringLength));
+        result.add(substringFirstFive);
+        result.add(lowerCaseConversion);
+        return result;   
     }
 
     /**
-     * Question 2
+     * Question 2 <--Done, BW
      * Check if the input string starts with 'Sales', ends with 'Force', and contains 'Awesome'.
      * Example: checkStringContent('Salesforce is Awesome!') should return a list like [true, false, true].
      * @param input The input string.
      * @return A list of boolean values indicating whether the string starts with 'Sales', ends with 'Force', or contains 'Awesome'.
      */
     public static List<Boolean> checkStringContent(String input) {
-        // Initialize a list to store the results
-        
-        // Check if the string starts with 'Sales'
-        
-        // Check if the string ends with 'Force'
-        
-        // Check if the string contains 'Awesome'
-        
-        return null; // Replace null with the variable you used to store the result
-    }
+      // Initialize a list to store the results
+      List<Boolean> result = new List<Boolean>();
+      // Check if the string starts with 'Sales'
+      Boolean startsSales = input.startsWith('Sales');
+      // Check if the string ends with 'Force'
+      Boolean endsForce = input.endsWith('Force');
+      // Check if the string contains 'Awesome'
+      Boolean hasAwesome = input.contains('Awesome');
+      result.add(startsSales);
+      result.add(endsForce);
+      result.add(hasAwesome);
+      return result;
+      //return null; // Replace null with the variable you used to store the result
+  }
 
     /**
-     * Question 3
+     * Question 3 <--- Done! First Try!!! BW
      * Take a sentence then remove any duplicate words, and return the sentence with only unique words.
      * Example: removeDuplicateWords('Hello Hello Salesforce Salesforce') should return 'Hello Salesforce'.
      * @param sentence The input sentence.
      * @return A string consisting of only unique words from the input sentence.
      */
     public static String removeDuplicateWords(String sentence) {
+        if (sentence == null){
+        return null;
+        }
         // Split the sentence into words
-
+        List<String> sentencePartsList = sentence.split(' ');
+        //System.debug('sentencePartsList = ' + sentencePartsList);
         // Create a set to store the unique words
-
+        Set<String> mySplitStringSet = new Set<String>();
         // Add each word to the set
-
+        mySplitStringSet.addAll(sentencePartsList);
+        //System.debug('mySplitStringSet = ' + mySplitStringSet);
         // Join the unique words back into a sentence
-
+        String joinedSet = String.join(mySplitStringSet, ' ');
         // Return the sentence with unique words
-        return null; // Replace null with the variable you used to store the result
+        return joinedSet; // Replace null with the variable you used to store the result
     }
 
     /**
-     * Question 4
+     * Question 4  <--Done. Need to work on learning more about this one. BW
      * This method takes a string as a parameter, and calculates the number of vowels in the string.
      * For simplicity, we will consider only five vowels: 'a', 'e', 'i', 'o', 'u', and we will ignore case.
      * Example: countVowels("Hello World!") should return 3
@@ -101,45 +115,61 @@ public with sharing class ClassesObjectsMethods {
      * @return The number of vowels in the string.
      */
     public static Integer countVowels(String str) {
-        // Initialize the result Integer
-
+        Integer counter = 0;
+        String allLowerCase = str.toLowerCase();
+        for (Integer n = 0; n < allLowerCase.length(); n++){
+         String currentChar = allLowerCase.substring(n,n + 1);
+          if (currentChar == 'a' ||
+          currentChar == 'e' ||
+          currentChar == 'i' ||
+          currentChar == 'o' ||
+          currentChar == 'u'){
+        counter++;
+          }
+        }
+        return counter;
         /*
         for () {
             // get individual characters from the string - hint use substring or split
             // check if the character is a vowel
             // if it is a vowel, increment the result Integer
-        }
+        }        
         */
-
-        return null; // Replace null with the variable you used to store the result
-    }
+      }
 
     /**
-     * Question 5
+     * Question 5  <--Taking a "mental" break from this one for a moment. Will come back to it.
      * Given a list of scientist names, combine their names together with a comma if it contains the letter 'g'.
      * The final string should not end with a comma.
      * Example: findTheScientist() should return "Alan Turing,Grace Hopper,Guido van Rossum,Stephen Hawking"
      * @return A string containing the names of scientists that contain the letter 'g'.
      */
-    public static String findTheScientist() {
+     public static String findTheScientist() {
         // The list of scientists' names
         List<String> scientistNames = new List<String>{'Tim Berners-Lee', 'Alan Turing', 'Grace Hopper', 'Donald Knuth', 'Guido van Rossum', 'Ken Thompson', 'Stephen Hawking'};
 
-        // The variable to store the concatenated string
-
-        // Loop through the list of scientists' names
-
-            // If the name doesn't contain the letter 'G', skip this iteration
-
-            // Add the name to the result string, followed by a comma
-
-        // Remove the last comma from the result string
-
-        return null; // Replace null with the variable you used to store the result
-    }
+      // The variable to store the concatenated string
+     String namesWithG = '';
+     // Loop through the list of scientists' names
+     for(Integer i = 0; i < scientistNames.size(); i++){
+        String tempName = scientistNames.get(i);
+        List<String> listWithNamesWithG = new List<String>();
+         if (tempName.toLowerCase().contains('g')){
+           listWithNamesWithG.add(tempName);
+         }
+             else{ continue;
+              return String.join(listWithNamesWithG, ', ');
+             }              
+             }
+         // If the name doesn't contain the letter 'G', skip this iteration
+         // Add the name to the result string, followed by a comma
+     // Remove the last comma from the result string
+     return namesWithG; 
+ }
+ 
 
     /**
-     * Question 6
+     * Question 6  <---Done BW
      * This method calculates the absolute value of the difference between of two input numbers that are raised to the 2nd power.
      * Example: calculateDifferenceOfSquares(3, 4) should return 7.
      * @param a The first number.
@@ -147,40 +177,48 @@ public with sharing class ClassesObjectsMethods {
      * @return The absolute value of the difference
      */
     public static Double calculateDifferenceOfSquares(Double a, Double b) {
-        // Square the input numbers using the Math.pow() function
-
-        // Calculate the absolute difference using Math.abs() function
-
-        // Return the result
-        return null; // Replace null with the variable you used to store the result
+  if (a == null || b == null){
+  return null;
+  }
+   // Square the input numbers using the Math.pow() function
+    else {
+      Double result = (Math.abs((Math.pow(a, 2) - Math.pow(b, 2))));
+   // Calculate the absolute difference using Math.abs() function
+   // Return the result
+   return result; 
     }
+}
 
     /**
-     * Question 7
+     * Question 7  <--Done BW
      * Generate a random number between 50 and 100
      * Example: generateRandomNumber() should return a number like 75.
      * @return A integer between 50 and 100.
      */
     public static Integer generateRandomNumber() {
-        // Use Math class to generate number between 50 and 100
-
-        // Return the random integer
-        return null; // Replace null with the variable you used to store the result
-    }
+      // Use Math class to generate number between 50 and 100
+      Integer randomNumberResult;
+      Double randomNumber = (Math.random() * 100);
+      Long convertedToLong = randomNumber.longValue();
+      randomNumberResult = convertedToLong.intValue();
+      return randomNumberResult;
+     // Return the random integer
+    
+ }
 
     /**
-     * Question 8
+     * Question 8  <-- Done BW
      * Format the current date in the current user locale format.
      * Example: getCurrentDate() should return a string like "3/21/2001" for US locale users. Locale/String may differ depending on your location.
      * @return The current date in the current user locale format.
      */
     public static String getCurrentDate() {
         // Get the todays date
-
+        Date x = Date.today();
+        String todaysDate = x.format();
         // Format the current date
-
         // Return the result
-        return null; // Replace null with the variable you used to store the result
+        return todaysDate; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -378,6 +416,7 @@ public with sharing class ClassesObjectsMethods {
      * @return The Person object of the older person.
      */
     public static Person getOlderPerson(Person person1, Person person2) {
+        
         return null; // Replace null with the variable you used to store the result
     }
 }
