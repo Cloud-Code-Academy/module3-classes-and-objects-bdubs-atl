@@ -138,7 +138,7 @@ public with sharing class ClassesObjectsMethods {
       }
 
     /**
-     * Question 5  <--Taking a "mental" break from this one for a moment. Will come back to it.
+     * Question 5  <--FINALLY!!! Last issue I was having was that I had a space after each comma and the testing result did not. 
      * Given a list of scientist names, combine their names together with a comma if it contains the letter 'g'.
      * The final string should not end with a comma.
      * Example: findTheScientist() should return "Alan Turing,Grace Hopper,Guido van Rossum,Stephen Hawking"
@@ -149,22 +149,20 @@ public with sharing class ClassesObjectsMethods {
         List<String> scientistNames = new List<String>{'Tim Berners-Lee', 'Alan Turing', 'Grace Hopper', 'Donald Knuth', 'Guido van Rossum', 'Ken Thompson', 'Stephen Hawking'};
 
       // The variable to store the concatenated string
-     String namesWithG = '';
+      
      // Loop through the list of scientists' names
-     for(Integer i = 0; i < scientistNames.size(); i++){
-        String tempName = scientistNames.get(i);
+
         List<String> listWithNamesWithG = new List<String>();
-         if (tempName.toLowerCase().contains('g')){
-           listWithNamesWithG.add(tempName);
-         }
-             else{ continue;
-              return String.join(listWithNamesWithG, ', ');
-             }              
-             }
+        for (String name : scientistNames) {
+            if (name.toLowerCase().contains('g')) {
+           listWithNamesWithG.add(name);
+         }           
+       }
          // If the name doesn't contain the letter 'G', skip this iteration
          // Add the name to the result string, followed by a comma
      // Remove the last comma from the result string
-     return namesWithG; 
+     String result = String.join(listWithNamesWithG, ',');
+     return result;
  }
  
 
@@ -190,7 +188,7 @@ public with sharing class ClassesObjectsMethods {
 }
 
     /**
-     * Question 7  <--Done BW
+     * Question 7 <--Needs Work. Passed the first 2 times, but I think that's because it just happened to generate a number b/t 50-100. Not b/c it will ONLY generate numbers b/t 50-100.
      * Generate a random number between 50 and 100
      * Example: generateRandomNumber() should return a number like 75.
      * @return A integer between 50 and 100.
@@ -222,26 +220,37 @@ public with sharing class ClassesObjectsMethods {
     }
 
     /**
-     * Question 9
+     * Question 9  <--Done! BW
      * Given a date time return the day of the week in number format
      * @param dt the current date and time
      * @return The number of the day of the week for the given date.
      */
     public static String getDayOfWeek(DateTime dt) {
+        Datetime dateAndTime = System.now();   //What's the difference between System.now and today()? Is it bc you use Date vs Datetime?
+        String dayOfWeek = dateAndTime.format('EEEE');
         // Define a map of day of the week as a key and day number as the value
         // Monday = 1, Tuesday = 2, etc.
-
+        Map<String, String> daysOfTheWeek = new Map<String, String> ();
+        daysOfTheWeek.put('Monday', '1');
+        daysOfTheWeek.put('Tuesday', '2');
+        daysOfTheWeek.put('Wednesday', '3');
+        daysOfTheWeek.put('Thursday', '4');
+        daysOfTheWeek.put('Friday', '5');
+        daysOfTheWeek.put('Saturday', '6');
+        daysOfTheWeek.put('Sunday', '7'); 
         // Get the day name using .format('EEEE');
-
+        if (dayOfWeek == null) {
+            return null;
+        }
+        String numberOfDay = daysOfTheWeek.get(dayOfWeek);
+        return numberOfDay;
         // Get the day number from the map using the day name
-
         // Return the result as a string
-        return null; // Replace null with the variable you used to store the result
     }
 
 
     /**
-     * Question 10
+     * Question 10  Done! BW
      * Calculate the difference between the years of two dates
      * For example, if the first date is 2023-01-01 and the second date is 2025-12-31, the method should return 2
      * If either of the dates is null, return null.
@@ -250,14 +259,18 @@ public with sharing class ClassesObjectsMethods {
      * @return The a positive number years between the two dates, or null if either date is null.
      */
     public static Integer calculateYearDifference(Date d1, Date d2) {
-
+        Integer differenceInYears;
+        // Would this ternary work? --> differenceInYears = (d1 = null || d2 = null)? null: differenceInYears = (d2.Year() - d1.Year());
+        if (d1 == null || d2 == null) {
+            return null;
+        } differenceInYears = (d2.Year() - d1.Year());
         // Subtract the difference in years
 
-        return null; // Replace null with the variable you used to store the result
+        return differenceInYears; // Replace null with the variable you used to store the result
     }
 
     /**
-     * Question 11
+     * Question 11 <---Come back to this for testing...........
      * The Book class represents a book in a library. 
      * Each Book object has a title and an author, and methods to return these details.
      * This class can be used in the context of a library management system, bookstore, etc.
@@ -268,33 +281,40 @@ public with sharing class ClassesObjectsMethods {
         // title
         // author
         // pages
-    
+        public String title;
+        public String author;
+        public Integer pages;
         // Book constructor to initialize the title and author
-        public Book() {
+        public Book(String title, String author) {
             // Initialize the title and author
+            this.title = title;
+            this.author = author;
         }
     
         // Method that returns the details of the book
         public String getBookDetails() {
             // return A string containing the details of the book in the format "Title: <title>, Author: <author>"
-            return null; // Replace null with the variable you used to store the result
+            String bookDetails = 'Title: ' + this.title + ', Author: ' + this.author;
+            return  bookDetails; // Replace null with the variable you used to store the result
         }
     }
     
 
     /**
-     * Question 12
+     * Question 12 <--Done! BW
      * Create a Book object and returns the details of the book.
      * For example, createAndGetBookDetails() should return a string like "Title: A Brief History of Time, Author: Stephen Hawking".
      * @return A string containing the details of the book.
      */
     public static String createAndGetBookDetails() {
         // Create a Book object with title "A Brief History of Time" and author "Stephen Hawking"
-
+        Book newBookObject = new Book('A Brief History of Time', 'Stephen Hawking');
+     //   titleInput = 'A Brief History of Time';
+     //   authorInput = 'Stephen Hawking';
         // Call the getBookDetails method on the book object to get the details of the book
-
+        String getBookDetails = newBookObject.getBookDetails();
         // Return the details of the book
-        return null; // Replace null with the variable you used to store the result
+        return getBookDetails; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -308,18 +328,22 @@ public with sharing class ClassesObjectsMethods {
      */
     public static List<Book> generateBookList(Book myBook1) {
         // Create a list of books
-
+        List<Book> bookList = new List<Book>();
         // Update the title and author of myBook1
-
         // Update the pages for myBook1 to 352
-
+        //Book myBook1 = new Book('Harry Potter and the Chamber of Secrets', 'J.K. Rowling');
+        myBook1.title = 'Harry Potter and the Chamber of Secrets';
+        myBook1.author = 'J.K. Rowling';
+        myBook1.pages = 352;
         // Create a new Book object with title "A Brief History of Time" and author "Stephen Hawking"
-
+        Book myBook2 = new Book('A Brief History of Time', 'Stephen Hawking');
         // Update the pages for A Brief History of Time to 256
-
+        myBook2.pages = 256;
         // Add the book to the list
-        
-        return null; // Replace null with the variable you used to store the result      
+        //List<Book> bookList = new List<Book>();
+        bookList.add(myBook1);
+        bookList.add(myBook2);
+        return bookList; // Replace null with the variable you used to store the result      
     }
 
 
@@ -332,24 +356,30 @@ public with sharing class ClassesObjectsMethods {
      */
     public class Person {
         // Declare private two instance variables - (TEXT) name and (Number) age
-        
+        private String name { get; set; }
+        private Integer age { get; set; }
         // Constructor to initialize the name and age
-    
+        public Person(String name, Integer age) {
+            this.name = name;
+            this.age = age;
+          }
         // Method introduceYourself that returns the details of the person        
         // Return a string in the format "Hello, my name is <name> and I am <age> years old."
         // For example, introduceYourself() should return a string like "Hello, my name is John Doe and I am 28 years old."
-
+        public String introduceYourself() {
+            return 'Hello, my name is ' + name + ' and I am ' + age + ' years old.';
+        }
         // Getter method that returns the name of the person
-
+       
         // Getter method that returns the age of the person
-
+        
         // Setter method that sets the name of the person
 
         // Setter method that sets the age of the person
-    }
+    } 
 
     /**
-     * Question 15
+     * Question 15  <--Done! BW
      * Create a Person object and returns the details of the person.
      * For example, personDetails() should return a list like ["Hello, my name is John Doe and I am 28 years old.", "John Doe", "28"].
      * @return A string containing the details of the person.
@@ -359,14 +389,16 @@ public with sharing class ClassesObjectsMethods {
         List<String> results = new List<String>();
         // Create a new instance of Person class
         // Name the person 'John Doe' and set the age to 28
-
+        Person john = new Person('John Doe', 28);
         // Add the details of the person using the introduceYourself method
-
+        String intro = john.introduceYourself();
         // Get the name of the person using the getter method and add it to the list
-
+        results.add(john.introduceYourself());
+        results.add(john.name);
+        results.add(String.valueof(john.age));
         // Get the age of the person using the getter method and add it to the list
         
-        return null; // Replace null with the variable you used to store the result
+        return results; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -378,9 +410,9 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Person createPerson(String name, Integer age) {
         // Create a new instance of the Person class using the provided name and age
-        
+        Person newlyCreatedPerson = new Person(name, age);
         // Return the new instance of the Person class
-        return null; // Replace null with the variable you used to store the result
+        return newlyCreatedPerson; // Replace null with the variable you used to store the result
     }
 
     /**
@@ -396,12 +428,15 @@ public with sharing class ClassesObjectsMethods {
 
         // Loop through each name in the provided list of names
             // Create a new Person object for each name
-            
             // Add the new Person object to the list of Person objects
-        
+            List<Person> newPersons = new List<Person>();
+            for (String name : names) {
+                Person newlyCreatedPerson = new Person(name, age);
+                newPersons.add(createPerson(name, age));
+            }
         
         // Return the list of Person objects
-        return null; // Replace null with the variable you used to store the result
+        return newPersons; 
     }
 
 
@@ -416,7 +451,25 @@ public with sharing class ClassesObjectsMethods {
      * @return The Person object of the older person.
      */
     public static Person getOlderPerson(Person person1, Person person2) {
-        
-        return null; // Replace null with the variable you used to store the result
+        if (person1.age == null && person2.age == null) {
+            return null;
+        }
+        if (person1.age == null) {
+            return person2;
+        }
+        if (person2.age == null) {
+            return person1;
+        }
+        if (person1.age > person2.age) {
+        return person1;
+        }
+        else if (person2.age > person1.age) {
+            return person2;
+        }
+        else {
+            return person1;
+        }
+
+        //return getOlderPerson; // Replace null with the variable you used to store the result
     }
 }
