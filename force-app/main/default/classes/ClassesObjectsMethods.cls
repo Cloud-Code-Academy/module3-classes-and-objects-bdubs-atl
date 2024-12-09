@@ -270,7 +270,7 @@ public with sharing class ClassesObjectsMethods {
     }
 
     /**
-     * Question 11 <---Come back to this for testing...........
+     * Question 11 Done! BW
      * The Book class represents a book in a library. 
      * Each Book object has a title and an author, and methods to return these details.
      * This class can be used in the context of a library management system, bookstore, etc.
@@ -289,6 +289,15 @@ public with sharing class ClassesObjectsMethods {
             // Initialize the title and author
             this.title = title;
             this.author = author;
+        }
+        public Book(String title, String author, Integer pages) {
+            this.title = title;
+            this.author = author;
+            this.pages = pages;
+        }
+
+        public Book(String title) {
+            this.title = title;
         }
     
         // Method that returns the details of the book
@@ -335,13 +344,12 @@ public with sharing class ClassesObjectsMethods {
         myBook1.title = 'Harry Potter and the Chamber of Secrets';
         myBook1.author = 'J.K. Rowling';
         myBook1.pages = 352;
+        bookList.add(myBook1);
         // Create a new Book object with title "A Brief History of Time" and author "Stephen Hawking"
-        Book myBook2 = new Book('A Brief History of Time', 'Stephen Hawking');
+        Book myBook2 = new Book('A Brief History of Time', 'Stephen Hawking', 256);
         // Update the pages for A Brief History of Time to 256
-        myBook2.pages = 256;
         // Add the book to the list
         //List<Book> bookList = new List<Book>();
-        bookList.add(myBook1);
         bookList.add(myBook2);
         return bookList; // Replace null with the variable you used to store the result      
     }
@@ -356,8 +364,8 @@ public with sharing class ClassesObjectsMethods {
      */
     public class Person {
         // Declare private two instance variables - (TEXT) name and (Number) age
-        private String name { get; set; }
-        private Integer age { get; set; }
+        private String name;
+        private Integer age;
         // Constructor to initialize the name and age
         public Person(String name, Integer age) {
             this.name = name;
@@ -370,14 +378,25 @@ public with sharing class ClassesObjectsMethods {
             return 'Hello, my name is ' + name + ' and I am ' + age + ' years old.';
         }
         // Getter method that returns the name of the person
-       
-        // Getter method that returns the age of the person
-        
-        // Setter method that sets the name of the person
+        public String getName() {
+            return this.name;
+        }
 
+        public Integer getAge() {
+            return this.age;
+        }
+        // Getter method that returns the age of the person
+        // Setter method that sets the name of the person
+        public void setAge(Integer age){
+            this.age = age;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
         // Setter method that sets the age of the person
     } 
-
+    
     /**
      * Question 15  <--Done! BW
      * Create a Person object and returns the details of the person.
@@ -451,25 +470,15 @@ public with sharing class ClassesObjectsMethods {
      * @return The Person object of the older person.
      */
     public static Person getOlderPerson(Person person1, Person person2) {
-        if (person1.age == null && person2.age == null) {
-            return null;
-        }
-        if (person1.age == null) {
-            return person2;
-        }
-        if (person2.age == null) {
-            return person1;
-        }
-        if (person1.age > person2.age) {
+        if (person1.getAge() > person2.getAge()) {
         return person1;
         }
-        else if (person2.age > person1.age) {
+        else if (person1.getAge() < person2.getAge()) {
             return person2;
         }
         else {
             return person1;
         }
 
-        //return getOlderPerson; // Replace null with the variable you used to store the result
     }
 }
