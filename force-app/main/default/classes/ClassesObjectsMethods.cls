@@ -195,14 +195,11 @@ public with sharing class ClassesObjectsMethods {
      */
     public static Integer generateRandomNumber() {
       // Use Math class to generate number between 50 and 100
-      Integer randomNumberResult;
-      Double randomNumber = (Math.random() * 100);
-      Long convertedToLong = randomNumber.longValue();
-      randomNumberResult = convertedToLong.intValue();
-      return randomNumberResult;
      // Return the random integer
-    
- }
+     Integer randomNumber = 50 + (Integer)(Math.random() * 51);
+     return randomNumber;
+    }
+ 
 
     /**
      * Question 8  <-- Done BW
